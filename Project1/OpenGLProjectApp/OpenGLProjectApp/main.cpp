@@ -20,6 +20,12 @@ float tri_increment = 0.0005f;
 
 float cur_angle = 0.0f;
 
+
+bool size_direction = true;
+float cur_size = 0.4f;
+float max_size = 0.8f;
+float mix_size = 0.1f;
+
 void CreateTriangle()
 {
 	// Data 
@@ -58,7 +64,7 @@ layout (location=0) in vec3 pos;				\n\
 uniform mat4 Model;				\n\
 void main()										\n\
 {												\n\
-	gl_Position = Model*vec4(0.4*pos.x,0.4*pos.y,pos.z,1.0);	\n\
+	gl_Position = Model*vec4(pos.x,pos.y,pos.z,1.0);	\n\
 }												\n\
 ";
 
@@ -237,16 +243,33 @@ int main()
 		glUseProgram(shader);
 
 
-		cur_angle += 0.001f;
+		cur_angle += 0.011f;
 		if (cur_angle >= 360)
 		{
 			cur_angle -= 360;
 		}
 
+
+
+		if (size_direction)
+		{
+			cur_size += 0.0001f;
+		}
+		else
+		{
+			cur_size -= 0.0001f;
+		}
+
+		if ((cur_size >= max_size) || (cur_size<=mix_size))
+		{
+			size_direction = !size_direction;
+		}
+		
+
 		glm::mat4 model(1.0f);
-		model = glm::translate(model, glm::vec3(trioffset, 0.0f, 0.0f));
 		model = glm::rotate(model, cur_angle * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
-		//model = glm::scale(model, glm::vec3(2.0f, 2.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(trioffset, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(cur_size, 0.4f, 1.0f));
 
 		//glUniform1f(uniformXmove, trioffset);
 		glUniformMatrix4fv(uniformModel,1,GL_FALSE,glm::value_ptr(model));

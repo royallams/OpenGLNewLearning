@@ -3,16 +3,22 @@
 #include <GLFW/glfw3.h>
 #include <string>
 #include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 //Windows Dimension
 const GLint WIDTH = 800, HEIGHT = 800;
+const float toRadians = 3.14159265f / 180.0f;
 
-GLuint VAO, VBO, shader, uniformXmove;// ACesss the GPU memory throught this pointers or ids.
- 
+//GLuint VAO, VBO, shader, uniformXmove;// ACesss the GPU memory throught this pointers or ids.
+GLuint VAO, VBO, shader, uniformModel;// ACesss the GPU memory throught this pointers or ids.
+
 bool direction = true;
 float trioffset = 0.0f;
 float tri_max_offset = 0.7f;
 float tri_increment = 0.0005f;
+
+float cur_angle = 0.0f;
 
 void CreateTriangle()
 {
@@ -49,10 +55,10 @@ void CreateTriangle()
 static const char* vShader = "					\n\
 #version 330									\n\
 layout (location=0) in vec3 pos;				\n\
-uniform float xMove;				\n\
+uniform mat4 Model;				\n\
 void main()										\n\
 {												\n\
-	gl_Position = vec4(0.4*pos.x+xMove,0.4*pos.y-xMove,pos.z,1.0);	\n\
+	gl_Position = Model*vec4(0.4*pos.x,0.4*pos.y,pos.z,1.0);	\n\
 }												\n\
 ";
 
@@ -136,7 +142,7 @@ void CompileShaders()
 		printf("Shader Validation Failed: %s \n", eLog);
 		return;
 	}
-	uniformXmove = glGetUniformLocation(shader, "xMove");
+	uniformModel = glGetUniformLocation(shader, "Model");
 
 	printf("Shader Validation : Success");
 }
@@ -220,6 +226,8 @@ int main()
 			direction = !direction;
 		}
 
+
+
 		//Clear Window
 		//glClearColor(1.0f,0.0f, 0.0f, 1.0f);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -227,7 +235,21 @@ int main()
 
 
 		glUseProgram(shader);
-		glUniform1f(uniformXmove, trioffset);
+
+
+		cur_angle += 0.001f;
+		if (cur_angle >= 360)
+		{
+			cur_angle -= 360;
+		}
+
+		glm::mat4 model(1.0f);
+		model = glm::translate(model, glm::vec3(trioffset, 0.0f, 0.0f));
+		model = glm::rotate(model, cur_angle * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 2.0f, 1.0f));
+
+		//glUniform1f(uniformXmove, trioffset);
+		glUniformMatrix4fv(uniformModel,1,GL_FALSE,glm::value_ptr(model));
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(0);

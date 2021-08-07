@@ -1,13 +1,13 @@
 ﻿  main.cpp
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\exponential.hpp(21,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\detail\func_geometric.inl(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\geometric.hpp(116,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\detail\func_matrix.inl(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\matrix.hpp(161,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\detail\type_mat4x4.inl(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\detail\type_mat4x4.hpp(188,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\ext\matrix_double4x4.hpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\ExternalLibs\GLM\glm\mat4x4.hpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\Project1\OpenGLProjectApp\OpenGLProjectApp\main.cpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGL\Project1\OpenGLProjectApp\OpenGLProjectApp\main.cpp(76,38): warning C4267: '=': conversion from 'size_t' to 'GLint', possible loss of data
-  OpenGLProjectApp.vcxproj -> D:\Repository\Github\OpenGL\Project1\OpenGLProjectApp\x64\Debug\OpenGLProjectApp.exe
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\exponential.hpp(21,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\detail\func_geometric.inl(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\geometric.hpp(116,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\detail\func_matrix.inl(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\matrix.hpp(161,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\detail\type_mat4x4.inl(1,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\detail\type_mat4x4.hpp(188,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\ext\matrix_double4x4.hpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\mat4x4.hpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\Project1\OpenGLProjectApp\OpenGLProjectApp\main.cpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
+D:\Repository\Github\OpenGLNewLearning\Project1\OpenGLProjectApp\OpenGLProjectApp\main.cpp(82,38): warning C4267: '=': conversion from 'size_t' to 'GLint', possible loss of data
+  OpenGLProjectApp.vcxproj -> D:\Repository\Github\OpenGLNewLearning\Project1\OpenGLProjectApp\x64\Debug\OpenGLProjectApp.exe

@@ -11,7 +11,7 @@ const GLint WIDTH = 800, HEIGHT = 800;
 const float toRadians = 3.14159265f / 180.0f;
 
 //GLuint VAO, VBO, shader, uniformXmove;// ACesss the GPU memory throught this pointers or ids.
-GLuint VAO, VBO, IBO, shader, uniformModel;// ACesss the GPU memory throught this pointers or ids.
+GLuint VAO, VBO, IBO, shader, uniformModel , uniformProjection;// ACesss the GPU memory throught this pointers or ids.
 
 bool direction = true;
 float trioffset = 0.0f;
@@ -79,10 +79,11 @@ static const char* vShader = "					\n\
 #version 330									\n\
 layout (location=0) in vec3 pos;				\n\
 uniform mat4 Model;								\n\
+uniform mat4 projection;								\n\
 out vec4 vColor ;								\n\
 void main()										\n\
 {												\n\
-	gl_Position = Model*vec4(pos.x,pos.y,pos.z,1.0);	\n\
+	gl_Position = projection*Model*vec4(pos,1.0);	\n\
 	vColor = vec4(clamp(pos,0.0f,1.0f),1.0f);	\n\
 }												\n\
 ";
@@ -169,7 +170,7 @@ void CompileShaders()
 		return;
 	}
 	uniformModel = glGetUniformLocation(shader, "Model");
-
+	uniformProjection = glGetUniformLocation(shader, "projection");
 	printf("Shader Validation : Success");
 }
 
@@ -227,6 +228,9 @@ int main()
 
 	CreateTriangle();
 	CompileShaders();
+
+
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)bufferWidth / (GLfloat)bufferHeight, 0.1f, 100.0f);
 
 
 	//Loop untill window closed
@@ -287,12 +291,13 @@ int main()
 		
 
 		glm::mat4 model(1.0f);
-		model = glm::rotate(model, cur_angle * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		//model = glm::translate(model, glm::vec3(trioffset, 0.0f, 0.0f));
+		//model = glm::rotate(model, cur_angle * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(trioffset, 0.0f, -2.5f));
 		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 
 		//glUniform1f(uniformXmove, trioffset);
 		glUniformMatrix4fv(uniformModel,1,GL_FALSE,glm::value_ptr(model));
+		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glBindVertexArray(VAO);
 
 

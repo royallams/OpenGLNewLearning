@@ -9,5 +9,5 @@ D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\detail\type_mat4x4.h
 D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\ext\matrix_double4x4.hpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
 D:\Repository\Github\OpenGLNewLearning\ExternalLibs\GLM\glm\mat4x4.hpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
 D:\Repository\Github\OpenGLNewLearning\Project1\OpenGLProjectApp\OpenGLProjectApp\main.cpp(5,1): warning C4103: alignment changed after including header, may be due to missing #pragma pack(pop)
-D:\Repository\Github\OpenGLNewLearning\Project1\OpenGLProjectApp\OpenGLProjectApp\main.cpp(88,38): warning C4267: '=': conversion from 'size_t' to 'GLint', possible loss of data
+D:\Repository\Github\OpenGLNewLearning\Project1\OpenGLProjectApp\OpenGLProjectApp\main.cpp(91,38): warning C4267: '=': conversion from 'size_t' to 'GLint', possible loss of data
   OpenGLProjectApp.vcxproj -> D:\Repository\Github\OpenGLNewLearning\Project1\OpenGLProjectApp\x64\Debug\OpenGLProjectApp.exe

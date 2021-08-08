@@ -61,19 +61,22 @@ void CreateTriangle()
 static const char* vShader = "					\n\
 #version 330									\n\
 layout (location=0) in vec3 pos;				\n\
-uniform mat4 Model;				\n\
+uniform mat4 Model;								\n\
+out vec4 vColor ;								\n\
 void main()										\n\
 {												\n\
 	gl_Position = Model*vec4(pos.x,pos.y,pos.z,1.0);	\n\
+	vColor = vec4(clamp(pos,0.0f,1.0f),1.0f);	\n\
 }												\n\
 ";
 
 static const char* fShader = "					\n\
 #version 330									\n\
 out vec4 colour;								\n\
+in vec4 vColor;									\n\
 void main()										\n\
 {												\n\
-	colour = vec4(1.0,0.0,0.0,1.0);				\n\
+	colour = vColor;							\n\
 }												\n\
 ";
 
@@ -267,9 +270,9 @@ int main()
 		
 
 		glm::mat4 model(1.0f);
-		model = glm::rotate(model, cur_angle * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::translate(model, glm::vec3(trioffset, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(cur_size, 0.4f, 1.0f));
+		//model = glm::rotate(model, cur_angle * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+		//model = glm::translate(model, glm::vec3(trioffset, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 
 		//glUniform1f(uniformXmove, trioffset);
 		glUniformMatrix4fv(uniformModel,1,GL_FALSE,glm::value_ptr(model));

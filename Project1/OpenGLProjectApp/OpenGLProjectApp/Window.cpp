@@ -2,41 +2,34 @@
 
 Window::Window()
 {
-	// take the defaults 
 	width = 800;
 	height = 600;
 
-	// Make Keys all 0 
 	for(size_t i = 0; i < 1024; i++)
 	{
 		keys[i] = 0;
 	}
 	
-	// Intiallly there is no change so default to 0
 	xChange = 0.0f;
 	yChange = 0.0f;
 }
 
 Window::Window(GLint windowWidth, GLint windowHeight)
 {
-	// Take user defined size 
 	width = windowWidth;
 	height = windowHeight;
 
-	// Initiliaze 0 
 	for (size_t i = 0; i < 1024; i++)
 	{
 		keys[i] = 0;
 	}
 	
-	// No change initially
 	xChange = 0.0f;
 	yChange = 0.0f;
 }
 
 int Window::Initialise()
 {
-	// GLFW Start , if failed return,
 	if (!glfwInit())
 	{
 		printf("Error Initialising GLFW");
@@ -70,13 +63,11 @@ int Window::Initialise()
 
 	// Handle Key + Mouse Input
 	createCallbacks();
-	//glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);// If we dont want to see the cursor.
+	glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Allow modern extension access
 	glewExperimental = GL_TRUE;
 
-
-	// OPen GL wrangler starts
 	GLenum error = glewInit();
 	if (error != GLEW_OK)
 	{
@@ -89,22 +80,19 @@ int Window::Initialise()
 	glEnable(GL_DEPTH_TEST);
 
 	// Create Viewport
-	glViewport(0, 0, bufferWidth, bufferHeight);// Pass buffer sizes to the OpenGL
+	glViewport(0, 0, bufferWidth, bufferHeight);
 
-	glfwSetWindowUserPointer(mainWindow, this);// This will tell the glfw to enable callbacks for mainwindow. otherwise the static function has no idea of the object
+	glfwSetWindowUserPointer(mainWindow, this);
 }
 
 void Window::createCallbacks()
 {
-	// For Keyboard 
-	glfwSetKeyCallback(mainWindow, handleKeys);// Which window?, Which callback function?
-	// For Mouse
+	glfwSetKeyCallback(mainWindow, handleKeys);
 	glfwSetCursorPosCallback(mainWindow, handleMouse);
 }
 
 GLfloat Window::getXChange()
 {
-	// Once you take the changes , then reset 
 	GLfloat theChange = xChange;
 	xChange = 0.0f;
 	return theChange;
@@ -112,7 +100,6 @@ GLfloat Window::getXChange()
 
 GLfloat Window::getYChange()
 {
-	// Once you take the changes , then reset 
 	GLfloat theChange = yChange;
 	yChange = 0.0f;
 	return theChange;
@@ -120,16 +107,13 @@ GLfloat Window::getYChange()
 
 void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int mode)
 {
-	// Get the window that we passed earlier.
 	Window* theWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
-	// If it is escape pressed then close 
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)// if pressed
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
 
-	// If pressed then, put the value true , else false.
 	if (key >= 0 && key < 1024)
 	{
 		if (action == GLFW_PRESS)
@@ -145,12 +129,8 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 
 void Window::handleMouse(GLFWwindow* window, double xPos, double yPos)
 {
-	// Take the window which we passed earlier.
 	Window* theWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
-	// IF it is just the first move, the only take the current position. 
-	// No change for now.
-	// Make it false.
 	if (theWindow->mouseFirstMoved)
 	{
 		theWindow->lastX = xPos;
@@ -158,18 +138,15 @@ void Window::handleMouse(GLFWwindow* window, double xPos, double yPos)
 		theWindow->mouseFirstMoved = false;
 	}
 
+	theWindow->xChange = xPos - theWindow->lastX;
+	theWindow->yChange = theWindow->lastY - yPos;
 
-	theWindow->xChange = xPos - theWindow->lastX;// new postion - previous position
-	theWindow->yChange = theWindow->lastY - yPos;// previous y - last y, Done opposite. Gives best result
-	//theWindow->yChange = yPos - theWindow->lastY;// previous y - last y, Done opposite. Gives best result
-
-	// Back up the current position.
 	theWindow->lastX = xPos;
 	theWindow->lastY = yPos;
 }
 
 Window::~Window()
 {
-	glfwDestroyWindow(mainWindow);// Destroy the mainwindow memory
-	glfwTerminate();// Stop the GLFW context.
+	glfwDestroyWindow(mainWindow);
+	glfwTerminate();
 }

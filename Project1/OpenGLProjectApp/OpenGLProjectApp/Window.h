@@ -2,8 +2,8 @@
 
 #include "stdio.h"
 
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 class Window
 {
@@ -28,20 +28,20 @@ public:
 	~Window();
 
 private:
-	GLFWwindow* mainWindow;// GLFW mainwindow object pointer.
+	GLFWwindow* mainWindow;
 
-	GLint width, height;// Size of the window
-	GLint bufferWidth, bufferHeight;// Provide this buffer to the Opengl.Get it from GLFW.
+	GLint width, height;
+	GLint bufferWidth, bufferHeight;
 
-	bool keys[1024];//  Get the key strokes from the window. Pressed : true, Released : False
+	bool keys[1024];
 
-	GLfloat lastX;// Previous X position of mouse
-	GLfloat lastY;// Previous Y position of mouse
-	GLfloat xChange;// How much x position has changed?
-	GLfloat yChange;// How much Y position has changed?
-	bool mouseFirstMoved;//Check if the mouse has just entered the screen. avoid randomness.
+	GLfloat lastX;
+	GLfloat lastY;
+	GLfloat xChange;
+	GLfloat yChange;
+	bool mouseFirstMoved;
 
-	void createCallbacks();// Create both callbacks for keyboard and the mouse.
-	static void handleKeys(GLFWwindow* window, int key, int code, int action, int mode);// All Key stroker handle further
-	static void handleMouse(GLFWwindow* window, double xPos, double yPos);// All Mouse movement handle further
+	void createCallbacks();
+	static void handleKeys(GLFWwindow* window, int key, int code, int action, int mode);
+	static void handleMouse(GLFWwindow* window, double xPos, double yPos);
 };

@@ -1,17 +1,16 @@
 #pragma once
 
-#include <GL\glew.h>
+#include <GL/glew.h>
 
-#include <glm\glm.hpp>
-#include <glm\gtc\matrix_transform.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 
 class Camera
 {
 public:
 	Camera();
-	// Up is enough to find right and front. 
 	Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed);
 
 	void keyControl(bool* keys, GLfloat deltaTime);
